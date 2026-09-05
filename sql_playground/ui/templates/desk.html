@@ -3,23 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SQL Playground — Harbor Bindery desk</title>
+  <title>SQL Playground — composition notebook</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;500;650;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='desk.css') }}">
   <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
 </head>
 <body>
-  <div class="blotter">
-    <header class="ticket">
-      <p class="ticket__shop">Harbor Bindery · job ticket</p>
+  <div class="notebook">
+    <div class="spine" aria-hidden="true"></div>
+    <header class="nameplate">
+      <p class="ticket__shop nameplate__shop">Harbor Bindery · job ticket</p>
       <h1>SQL Playground</h1>
-      <p class="ticket__meta">Local SQLite ledger · bindery.sqlite · port 5055</p>
+      <p class="ticket__meta nameplate__meta">Local SQLite ledger · bindery.sqlite · port 5055</p>
     </header>
 
     <div class="spread">
-      <aside class="gutter" aria-label="Schema">
+      <aside class="gutter left-leaf" aria-label="Schema">
         <h2>Folio</h2>
         <p class="lede">Tables in the current book.</p>
         <div id="folio" class="gutter-body">
@@ -32,7 +33,7 @@
         </div>
       </aside>
 
-      <main class="page">
+      <main class="page right-leaf">
         <form
           id="run-form"
           class="editor-wrap"
