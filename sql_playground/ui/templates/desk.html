@@ -27,15 +27,15 @@
     <div class="workspace">
       <aside class="sidebar" aria-label="Schema">
         <section class="pane">
-          <h2>Contents</h2>
-          <p class="lede">Tables in this notebook.</p>
+          <h2>Schema</h2>
+          <p class="lede">Tables in bindery.sqlite</p>
           <div id="folio" class="gutter-body">
             {% include "partials/schema.html" %}
           </div>
         </section>
         <section class="pane">
-          <h2 class="second">Margin notes</h2>
-          <p class="lede">Queries you saved in the gutter.</p>
+          <h2 class="second">Saved queries</h2>
+          <p class="lede">Click a name to load it into the editor.</p>
           <div id="clippings">
             {% include "partials/saved.html" %}
           </div>
@@ -51,10 +51,10 @@
           hx-swap="innerHTML"
         >
           <div class="editor-toolbar">
-            <label for="sql">Tonight’s query</label>
+            <label for="sql">Query</label>
             <div class="editor-bar">
-              <button type="submit">Run it</button>
-              <span class="hint">Ctrl+Enter runs the query.</span>
+              <button type="submit">Run</button>
+              <span class="hint">Ctrl+Enter</span>
             </div>
           </div>
           <textarea id="sql" name="sql" rows="12" spellcheck="false">{{ default_sql }}</textarea>
@@ -66,7 +66,7 @@
           hx-include="#sql"
           hx-swap="innerHTML"
         >
-          <label for="title">Save in the margin</label>
+          <label for="title">Save query</label>
           <div class="pin-row">
             <input id="title" name="title" type="text" placeholder="Open invoices by town" autocomplete="off">
             <button type="submit" class="ghost">Save</button>
@@ -74,8 +74,8 @@
         </form>
         <section id="results" class="results-slot" aria-live="polite">
           <div class="quiet idle-card">
-            <h3>Next line is blank</h3>
-            <p>Run the query, or save it in the margin. Bad SQL gets the red pen — not a stack trace.</p>
+            <h3>No results yet</h3>
+            <p>Run a query to fill this table. Syntax errors show here — not a stack trace.</p>
           </div>
         </section>
       </div>
