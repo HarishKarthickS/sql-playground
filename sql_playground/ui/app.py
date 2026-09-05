@@ -6,6 +6,7 @@ from flask import Flask, render_template, request
 
 from sql_playground.data.connection import Database, default_paths
 from sql_playground.data.executor import run_sql
+from sql_playground.data.saved_queries import SavedQueryStore
 from sql_playground.data.schema import inspect_schema
 from sql_playground.data.seed import ensure_seeded
 from sql_playground.domain.errors import QueryError
@@ -21,6 +22,7 @@ def create_app() -> Flask:
         static_folder="static",
     )
     bindery = Database(BINDERY_PATH)
+    clippings = SavedQueryStore(Database(SAVED_PATH))
     ensure_seeded(bindery)
 
     @app.route("/")
@@ -29,6 +31,7 @@ def create_app() -> Flask:
         return render_template(
             "desk.html",
             tables=tables,
+            saved=clippings.list_all(),
             default_sql=_starter_sql(),
         )
 
@@ -42,7 +45,32 @@ def create_app() -> Flask:
         tables = inspect_schema(bindery)
         schema_html = render_template("partials/schema.html", tables=tables)
         results_html = render_template("partials/results.html", error=None, result=result)
-        return results_html + f'<div id="folio-refresh" hx-swap-oob="innerHTML:.gutter-body">{schema_html}</div>'
+        return results_html + (
+            '<div class="gutter-body" hx-swap-oob="innerHTML">' + schema_html + "</div>"
+        )
+
+    @app.post("/saved")
+    def save() -> str:
+        title = request.form.get("title", "")
+        sql = request.form.get("sql", "")
+        try:
+            clippings.add(title, sql)
+            error = None
+        except QueryError as exc:
+            error = str(exc)
+        return render_template("partials/saved.html", saved=clippings.list_all(), save_error=error)
+
+    @app.get("/saved/<int:query_id>")
+    def load(query_id: int) -> str:
+        item = clippings.get(query_id)
+        if item is None:
+            return "", 404
+        return item.sql, 200, {"Content-Type": "text/plain; charset=utf-8"}
+
+    @app.post("/saved/<int:query_id>/delete")
+    def delete(query_id: int) -> str:
+        clippings.delete(query_id)
+        return render_template("partials/saved.html", saved=clippings.list_all(), save_error=None)
 
     return app
 

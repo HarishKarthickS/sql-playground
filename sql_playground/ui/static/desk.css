@@ -97,6 +97,10 @@ html, body {
   font-size: 1.35rem;
 }
 
+.gutter h2.second {
+  margin-top: 1.4rem;
+}
+
 .lede {
   margin: 0.2rem 0 1rem;
   color: var(--faded);
@@ -286,6 +290,81 @@ th {
 
 .empty-folio {
   color: var(--faded);
+}
+
+.pin-form {
+  margin-top: 1rem;
+}
+
+.pin-form label {
+  display: block;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 0.35rem;
+}
+
+.pin-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.pin-row input {
+  flex: 1;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #c4b08a;
+  font: inherit;
+  color: var(--ink);
+  padding: 0.25rem 0;
+}
+
+.pin-row input:focus { outline: none; }
+
+.ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+}
+
+.clips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.clips li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  border-bottom: 1px dashed #c4b08a;
+  padding: 0.3rem 0;
+}
+
+.clip {
+  flex: 1;
+  background: none;
+  border: 0;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  color: var(--ink);
+  padding: 0;
+}
+
+.clip-drop {
+  background: none;
+  border: 0;
+  font: inherit;
+  font-size: 0.8rem;
+  color: var(--margin);
+  cursor: pointer;
+}
+
+.clip-error {
+  color: var(--margin);
+  font-size: 0.9rem;
 }
 
 @media (max-width: 860px) {

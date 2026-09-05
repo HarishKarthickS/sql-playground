@@ -22,3 +22,13 @@ if (form && sql) {
     }
   });
 }
+
+document.getElementById("clippings")?.addEventListener("click", async (event) => {
+  const button = event.target.closest(".clip");
+  if (!button || !sql) return;
+  const id = button.getAttribute("data-id");
+  const response = await fetch(`/saved/${id}`);
+  if (!response.ok) return;
+  sql.value = await response.text();
+  sql.focus();
+});
