@@ -25,6 +25,11 @@
         <div class="gutter-body">
           {% include "partials/schema.html" %}
         </div>
+        <h2 class="second">Clippings</h2>
+        <p class="lede">Saved statements, pinned to the blotter.</p>
+        <div id="clippings">
+          {% include "partials/saved.html" %}
+        </div>
       </aside>
 
       <main class="page">
@@ -40,6 +45,19 @@
           <div class="editor-bar">
             <button type="submit">Run page</button>
             <span class="hint">Ctrl+Enter runs the page.</span>
+          </div>
+        </form>
+        <form
+          class="pin-form"
+          hx-post="/saved"
+          hx-target="#clippings"
+          hx-include="#sql"
+          hx-swap="innerHTML"
+        >
+          <label for="title">Pin as clipping</label>
+          <div class="pin-row">
+            <input id="title" name="title" type="text" placeholder="Open invoices by town" autocomplete="off">
+            <button type="submit" class="ghost">Pin</button>
           </div>
         </form>
         <section id="results" class="results-slot" aria-live="polite">

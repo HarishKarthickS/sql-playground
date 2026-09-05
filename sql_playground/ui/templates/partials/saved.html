@@ -1,0 +1,17 @@
+{% if save_error is defined and save_error %}
+<p class="clip-error">{{ save_error }}</p>
+{% endif %}
+{% if saved %}
+<ul class="clips">
+  {% for item in saved %}
+  <li>
+    <button type="button" class="clip" data-id="{{ item.id }}">{{ item.title }}</button>
+    <form hx-post="/saved/{{ item.id }}/delete" hx-target="#clippings" hx-swap="innerHTML">
+      <button type="submit" class="clip-drop" aria-label="Drop {{ item.title }}">drop</button>
+    </form>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p class="empty-folio">No clippings pinned yet.</p>
+{% endif %}
