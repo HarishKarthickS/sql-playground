@@ -14,20 +14,20 @@
   <div class="notebook">
     <div class="spine" aria-hidden="true"></div>
     <header class="nameplate">
-      <p class="ticket__shop nameplate__shop">Harbor Bindery · job ticket</p>
+      <p class="nameplate__shop">Composition · subject: SQL</p>
       <h1>SQL Playground</h1>
-      <p class="ticket__meta nameplate__meta">Local SQLite ledger · bindery.sqlite · port 5055</p>
+      <p class="nameplate__meta">Local SQLite notebook · bindery.sqlite · port 5055</p>
     </header>
 
     <div class="spread">
-      <aside class="gutter left-leaf" aria-label="Schema">
-        <h2>Folio</h2>
-        <p class="lede">Tables in the current book.</p>
+      <aside class="left-leaf" aria-label="Schema">
+        <h2>Contents</h2>
+        <p class="lede">Tables in this notebook.</p>
         <div id="folio" class="gutter-body">
           {% include "partials/schema.html" %}
         </div>
-        <h2 class="second">Clippings</h2>
-        <p class="lede">Saved statements, pinned to the blotter.</p>
+        <h2 class="second">Margin notes</h2>
+        <p class="lede">Queries you saved in the gutter.</p>
         <div id="clippings">
           {% include "partials/saved.html" %}
         </div>
@@ -41,11 +41,11 @@
           hx-target="#results"
           hx-swap="innerHTML"
         >
-          <label for="sql">Statement</label>
+          <label for="sql">Tonight’s query</label>
           <textarea id="sql" name="sql" rows="12" spellcheck="false">{{ default_sql }}</textarea>
           <div class="editor-bar">
-            <button type="submit">Run page</button>
-            <span class="hint">Ctrl+Enter runs the page.</span>
+            <button type="submit">Run it</button>
+            <span class="hint">Ctrl+Enter runs the query.</span>
           </div>
         </form>
         <form
@@ -55,16 +55,16 @@
           hx-include="#sql"
           hx-swap="innerHTML"
         >
-          <label for="title">Pin as clipping</label>
+          <label for="title">Save in the margin</label>
           <div class="pin-row">
             <input id="title" name="title" type="text" placeholder="Open invoices by town" autocomplete="off">
-            <button type="submit" class="ghost">Pin</button>
+            <button type="submit" class="ghost">Save</button>
           </div>
         </form>
         <section id="results" class="results-slot" aria-live="polite">
           <div class="quiet idle-card">
-            <h3>The page is still blank</h3>
-            <p>Run the statement, or pin it as a clipping. A jammed query lands here in red ink.</p>
+            <h3>Next line is blank</h3>
+            <p>Run the query, or save it in the margin. Bad SQL gets the red pen — not a stack trace.</p>
           </div>
         </section>
       </main>

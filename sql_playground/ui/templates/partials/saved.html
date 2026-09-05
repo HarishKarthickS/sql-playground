@@ -7,11 +7,11 @@
   <li>
     <button type="button" class="clip" data-id="{{ item.id }}">{{ item.title }}</button>
     <form hx-post="/saved/{{ item.id }}/delete" hx-target="#clippings" hx-swap="innerHTML">
-      <button type="submit" class="clip-drop" aria-label="Drop {{ item.title }}">drop</button>
+      <button type="submit" class="clip-drop" aria-label="Erase {{ item.title }}">erase</button>
     </form>
   </li>
   {% endfor %}
 </ul>
 {% else %}
-<p class="empty-folio">No clippings pinned yet. Name the page and hit Pin.</p>
+<p class="empty-folio">Nothing in the margin yet. Name the query and hit Save.</p>
 {% endif %}
