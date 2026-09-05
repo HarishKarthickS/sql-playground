@@ -3,37 +3,46 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SQL Playground — composition notebook</title>
+  <title>SQL Playground</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='desk.css') }}">
   <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
 </head>
 <body>
-  <div class="notebook">
-    <div class="spine" aria-hidden="true"></div>
-    <header class="nameplate">
-      <p class="nameplate__shop">Composition · subject: SQL</p>
-      <h1>SQL Playground</h1>
-      <p class="nameplate__meta">Local SQLite notebook · bindery.sqlite · port 5055</p>
+  <div class="app">
+    <header class="topbar">
+      <div class="topbar__brand">
+        <span class="topbar__mark" aria-hidden="true"></span>
+        <h1>SQL Playground</h1>
+      </div>
+      <div class="topbar__conn" title="Local SQLite database">
+        <span class="topbar__dot" aria-hidden="true"></span>
+        <span>bindery.sqlite</span>
+        <span class="topbar__port">127.0.0.1:5055</span>
+      </div>
     </header>
 
-    <div class="spread">
-      <aside class="left-leaf" aria-label="Schema">
-        <h2>Contents</h2>
-        <p class="lede">Tables in this notebook.</p>
-        <div id="folio" class="gutter-body">
-          {% include "partials/schema.html" %}
-        </div>
-        <h2 class="second">Margin notes</h2>
-        <p class="lede">Queries you saved in the gutter.</p>
-        <div id="clippings">
-          {% include "partials/saved.html" %}
-        </div>
+    <div class="workspace">
+      <aside class="sidebar" aria-label="Schema">
+        <section class="pane">
+          <h2>Contents</h2>
+          <p class="lede">Tables in this notebook.</p>
+          <div id="folio" class="gutter-body">
+            {% include "partials/schema.html" %}
+          </div>
+        </section>
+        <section class="pane">
+          <h2 class="second">Margin notes</h2>
+          <p class="lede">Queries you saved in the gutter.</p>
+          <div id="clippings">
+            {% include "partials/saved.html" %}
+          </div>
+        </section>
       </aside>
 
-      <main class="page right-leaf">
+      <div class="main">
         <form
           id="run-form"
           class="editor-wrap"
@@ -41,12 +50,14 @@
           hx-target="#results"
           hx-swap="innerHTML"
         >
-          <label for="sql">Tonight’s query</label>
-          <textarea id="sql" name="sql" rows="12" spellcheck="false">{{ default_sql }}</textarea>
-          <div class="editor-bar">
-            <button type="submit">Run it</button>
-            <span class="hint">Ctrl+Enter runs the query.</span>
+          <div class="editor-toolbar">
+            <label for="sql">Tonight’s query</label>
+            <div class="editor-bar">
+              <button type="submit">Run it</button>
+              <span class="hint">Ctrl+Enter runs the query.</span>
+            </div>
           </div>
+          <textarea id="sql" name="sql" rows="12" spellcheck="false">{{ default_sql }}</textarea>
         </form>
         <form
           class="pin-form"
@@ -67,7 +78,7 @@
             <p>Run the query, or save it in the margin. Bad SQL gets the red pen — not a stack trace.</p>
           </div>
         </section>
-      </main>
+      </div>
     </div>
   </div>
   <script src="{{ url_for('static', filename='desk.js') }}"></script>
