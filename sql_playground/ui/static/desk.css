@@ -1,0 +1,238 @@
+:root {
+  --paper: #efe4cc;
+  --paper-deep: #e4d6b8;
+  --ink: #24180f;
+  --faded: #6d5c48;
+  --rule: rgba(95, 107, 82, 0.28);
+  --margin: #9c3b2e;
+  --sage: #4f5d45;
+  --brass: #a67c3a;
+  --punch: #d7c9a8;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background:
+    radial-gradient(circle at 12% 8%, #d9cba8 0, transparent 40%),
+    linear-gradient(160deg, #cbb992, #b89a6e 55%, #9e8060);
+  color: var(--ink);
+  font-family: "Newsreader", "Palatino Linotype", Palatino, serif;
+  font-optical-sizing: auto;
+}
+
+.blotter {
+  max-width: 1180px;
+  margin: 2.2rem auto 3rem;
+  padding: 0 1.2rem;
+}
+
+.ticket {
+  background: var(--paper);
+  border: 1px solid #c4b08a;
+  box-shadow: 0 18px 40px rgba(50, 32, 12, 0.22);
+  padding: 1.1rem 1.4rem 1rem 4.2rem;
+  position: relative;
+}
+
+.ticket::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 2.6rem;
+  width: 2px;
+  background: var(--margin);
+  opacity: 0.85;
+}
+
+.ticket__shop {
+  margin: 0;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  color: var(--margin);
+}
+
+.ticket h1 {
+  margin: 0.15rem 0 0.2rem;
+  font-weight: 650;
+  font-size: 2.4rem;
+  letter-spacing: -0.02em;
+}
+
+.ticket__meta {
+  margin: 0;
+  color: var(--faded);
+  font-size: 0.95rem;
+}
+
+.spread {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.gutter, .page {
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 27px,
+      var(--rule) 28px
+    ),
+    var(--paper);
+  border: 1px solid #c4b08a;
+  min-height: 70vh;
+  box-shadow: 0 12px 28px rgba(50, 32, 12, 0.14);
+}
+
+.gutter {
+  padding: 1.1rem 1rem 1.4rem 1.1rem;
+}
+
+.gutter h2 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.lede {
+  margin: 0.2rem 0 1rem;
+  color: var(--faded);
+  font-size: 0.95rem;
+}
+
+.folio {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.folio > li {
+  border-bottom: 1px dashed #c4b08a;
+  padding: 0.35rem 0;
+}
+
+.folio__name {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+  background: none;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  padding: 0.15rem 0;
+  text-align: left;
+}
+
+.folio__name span {
+  color: var(--sage);
+  font-size: 0.85rem;
+  font-variant-numeric: oldstyle-nums;
+}
+
+.folio__cols {
+  list-style: none;
+  margin: 0.2rem 0 0.4rem;
+  padding: 0 0 0 0.4rem;
+}
+
+.folio__cols li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+}
+
+.folio__cols code {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+}
+
+.folio__cols em {
+  font-style: normal;
+  color: var(--faded);
+}
+
+.page {
+  padding: 1.1rem 1.2rem 1.4rem 3.6rem;
+  position: relative;
+}
+
+.page::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 2.4rem;
+  width: 2px;
+  background: var(--margin);
+}
+
+.editor-wrap label {
+  display: block;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 0.4rem;
+}
+
+textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 220px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #c4b08a;
+  color: var(--ink);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.86rem;
+  line-height: 1.65;
+  padding: 0;
+}
+
+textarea:focus {
+  outline: none;
+  background: rgba(166, 124, 58, 0.06);
+}
+
+.editor-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.8rem;
+}
+
+button[type="submit"], .ghost {
+  font-family: "Newsreader", serif;
+  font-size: 1rem;
+  background: var(--ink);
+  color: var(--paper);
+  border: 0;
+  padding: 0.45rem 0.95rem;
+  cursor: pointer;
+}
+
+button[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.hint, .idle {
+  color: var(--faded);
+}
+
+.results-slot {
+  margin-top: 1.4rem;
+}
+
+.empty-folio {
+  color: var(--faded);
+}
+
+@media (max-width: 860px) {
+  .spread { grid-template-columns: 1fr; }
+  .page { padding-left: 3rem; }
+}
