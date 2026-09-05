@@ -22,19 +22,27 @@
       <aside class="gutter" aria-label="Schema">
         <h2>Folio</h2>
         <p class="lede">Tables in the current book.</p>
-        {% include "partials/schema.html" %}
+        <div class="gutter-body">
+          {% include "partials/schema.html" %}
+        </div>
       </aside>
 
       <main class="page">
-        <form id="run-form" class="editor-wrap" action="/run" method="post">
+        <form
+          id="run-form"
+          class="editor-wrap"
+          hx-post="/run"
+          hx-target="#results"
+          hx-swap="innerHTML"
+        >
           <label for="sql">Statement</label>
           <textarea id="sql" name="sql" rows="12" spellcheck="false">{{ default_sql }}</textarea>
           <div class="editor-bar">
-            <button type="submit" disabled title="Query runner lands next">Run page</button>
-            <span class="hint">Ctrl+Enter once the runner is wired.</span>
+            <button type="submit">Run page</button>
+            <span class="hint">Ctrl+Enter runs the page.</span>
           </div>
         </form>
-        <section class="results-slot" aria-live="polite">
+        <section id="results" class="results-slot" aria-live="polite">
           <p class="idle">Results print here after a run.</p>
         </section>
       </main>

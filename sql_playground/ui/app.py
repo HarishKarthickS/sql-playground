@@ -2,11 +2,13 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 from sql_playground.data.connection import Database, default_paths
+from sql_playground.data.executor import run_sql
 from sql_playground.data.schema import inspect_schema
 from sql_playground.data.seed import ensure_seeded
+from sql_playground.domain.errors import QueryError
 
 ROOT = Path(__file__).resolve().parents[2]
 BINDERY_PATH, SAVED_PATH = default_paths(ROOT / "data")
@@ -29,6 +31,18 @@ def create_app() -> Flask:
             tables=tables,
             default_sql=_starter_sql(),
         )
+
+    @app.post("/run")
+    def run() -> str:
+        sql = request.form.get("sql", "")
+        try:
+            result = run_sql(bindery, sql)
+        except QueryError as exc:
+            return render_template("partials/results.html", error=str(exc), result=None)
+        tables = inspect_schema(bindery)
+        schema_html = render_template("partials/schema.html", tables=tables)
+        results_html = render_template("partials/results.html", error=None, result=result)
+        return results_html + f'<div id="folio-refresh" hx-swap-oob="innerHTML:.gutter-body">{schema_html}</div>'
 
     return app
 
