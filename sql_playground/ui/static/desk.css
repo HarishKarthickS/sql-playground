@@ -394,6 +394,7 @@ tbody tr:nth-child(even) td {
   border-color: var(--accent);
 }
 
+button.ghost[type="submit"],
 .ghost {
   font-family: var(--sans);
   font-size: 0.8rem;
@@ -406,6 +407,7 @@ tbody tr:nth-child(even) td {
   cursor: pointer;
 }
 
+button.ghost[type="submit"]:hover,
 .ghost:hover {
   background: var(--bg);
 }
