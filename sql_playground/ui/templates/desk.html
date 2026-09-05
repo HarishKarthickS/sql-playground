@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SQL Playground — Harbor Bindery desk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;500;650;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='desk.css') }}">
+  <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
+</head>
+<body>
+  <div class="blotter">
+    <header class="ticket">
+      <p class="ticket__shop">Harbor Bindery · job ticket</p>
+      <h1>SQL Playground</h1>
+      <p class="ticket__meta">Local SQLite ledger · bindery.sqlite · port 5055</p>
+    </header>
+
+    <div class="spread">
+      <aside class="gutter" aria-label="Schema">
+        <h2>Folio</h2>
+        <p class="lede">Tables in the current book.</p>
+        {% include "partials/schema.html" %}
+      </aside>
+
+      <main class="page">
+        <form id="run-form" class="editor-wrap" action="/run" method="post">
+          <label for="sql">Statement</label>
+          <textarea id="sql" name="sql" rows="12" spellcheck="false">{{ default_sql }}</textarea>
+          <div class="editor-bar">
+            <button type="submit" disabled title="Query runner lands next">Run page</button>
+            <span class="hint">Ctrl+Enter once the runner is wired.</span>
+          </div>
+        </form>
+        <section class="results-slot" aria-live="polite">
+          <p class="idle">Results print here after a run.</p>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='desk.js') }}"></script>
+</body>
+</html>

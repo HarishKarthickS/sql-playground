@@ -1,0 +1,22 @@
+{% if tables %}
+<ul class="folio">
+  {% for table in tables %}
+  <li>
+    <button type="button" class="folio__name" aria-expanded="false">
+      {{ table.name }}
+      <span>{{ table.row_count }} rows</span>
+    </button>
+    <ul class="folio__cols" hidden>
+      {% for col in table.columns %}
+      <li>
+        <code>{{ col.name }}</code>
+        <em>{{ col.col_type }}{% if col.primary_key %} · pk{% endif %}</em>
+      </li>
+      {% endfor %}
+    </ul>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p class="empty-folio">This book has no tables yet.</p>
+{% endif %}
