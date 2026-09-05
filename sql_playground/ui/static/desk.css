@@ -228,6 +228,62 @@ button[disabled] {
   margin-top: 1.4rem;
 }
 
+.grid-meta {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  color: var(--sage);
+}
+
+.grid-scroll {
+  overflow: auto;
+  max-height: 420px;
+  border-top: 1px solid #c4b08a;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums oldstyle-nums;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.35rem 0.55rem 0.35rem 0;
+  border-bottom: 1px solid rgba(196, 176, 138, 0.7);
+  font-size: 0.92rem;
+}
+
+th {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--sage);
+  position: sticky;
+  top: 0;
+  background: var(--paper);
+}
+
+.null {
+  color: var(--faded);
+  font-style: italic;
+}
+
+.blot {
+  border-left: 3px solid var(--margin);
+  padding: 0.2rem 0 0.4rem 0.8rem;
+  color: var(--margin);
+}
+
+.blot h3, .quiet h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.15rem;
+}
+
+.quiet p, .blot p {
+  margin: 0;
+}
+
 .empty-folio {
   color: var(--faded);
 }

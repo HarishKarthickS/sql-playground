@@ -1,0 +1,43 @@
+{% if error %}
+<div class="blot">
+  <h3>The press jammed</h3>
+  <p>{{ error }}</p>
+</div>
+{% elif result and result.is_tabular and result.is_empty %}
+<div class="quiet">
+  <h3>No rows</h3>
+  <p>The statement ran in {{ "%.1f"|format(result.elapsed_ms) }} ms and came back empty.</p>
+</div>
+{% elif result and result.is_tabular %}
+<div class="grid-wrap">
+  <p class="grid-meta">{{ result.rows|length }} row{% if result.rows|length != 1 %}s{% endif %} · {{ "%.1f"|format(result.elapsed_ms) }} ms</p>
+  <div class="grid-scroll">
+    <table>
+      <thead>
+        <tr>
+          {% for col in result.columns %}
+          <th>{{ col }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in result.rows %}
+        <tr>
+          {% for cell in row %}
+          <td>{% if cell is none %}<span class="null">null</span>{% else %}{{ cell }}{% endif %}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% elif result %}
+<div class="quiet">
+  <h3>Recorded</h3>
+  <p>
+    Statement applied in {{ "%.1f"|format(result.elapsed_ms) }} ms
+    {% if result.rowcount is not none %} · {{ result.rowcount }} row{% if result.rowcount != 1 %}s{% endif %} touched{% endif %}.
+  </p>
+</div>
+{% endif %}
