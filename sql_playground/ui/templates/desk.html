@@ -22,7 +22,7 @@
       <aside class="gutter" aria-label="Schema">
         <h2>Folio</h2>
         <p class="lede">Tables in the current book.</p>
-        <div class="gutter-body">
+        <div id="folio" class="gutter-body">
           {% include "partials/schema.html" %}
         </div>
         <h2 class="second">Clippings</h2>
@@ -61,7 +61,10 @@
           </div>
         </form>
         <section id="results" class="results-slot" aria-live="polite">
-          <p class="idle">Results print here after a run.</p>
+          <div class="quiet idle-card">
+            <h3>The page is still blank</h3>
+            <p>Run the statement, or pin it as a clipping. A jammed query lands here in red ink.</p>
+          </div>
         </section>
       </main>
     </div>

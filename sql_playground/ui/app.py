@@ -46,7 +46,7 @@ def create_app() -> Flask:
         schema_html = render_template("partials/schema.html", tables=tables)
         results_html = render_template("partials/results.html", error=None, result=result)
         return results_html + (
-            '<div class="gutter-body" hx-swap-oob="innerHTML">' + schema_html + "</div>"
+            '<div id="folio" hx-swap-oob="innerHTML">' + schema_html + "</div>"
         )
 
     @app.post("/saved")
