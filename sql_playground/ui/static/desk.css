@@ -76,6 +76,9 @@ html, body {
 
 .gutter, .page {
   background:
+    radial-gradient(circle at 18px 48px, var(--punch) 7px, transparent 8px),
+    radial-gradient(circle at 18px 148px, var(--punch) 7px, transparent 8px),
+    radial-gradient(circle at 18px 248px, var(--punch) 7px, transparent 8px),
     repeating-linear-gradient(
       to bottom,
       transparent 0,
@@ -224,7 +227,11 @@ button[disabled] {
   cursor: not-allowed;
 }
 
-.hint, .idle {
+.idle-card h3 {
+  color: var(--ink);
+}
+
+.idle, .idle-card p {
   color: var(--faded);
 }
 
