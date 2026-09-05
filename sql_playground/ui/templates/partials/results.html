@@ -1,12 +1,12 @@
 {% if error %}
 <div class="blot">
-  <h3>The press jammed</h3>
+  <h3>Red pen</h3>
   <p>{{ error }}</p>
 </div>
 {% elif result and result.is_tabular and result.is_empty %}
 <div class="quiet">
   <h3>No rows</h3>
-  <p>The statement ran in {{ "%.1f"|format(result.elapsed_ms) }} ms and came back empty.</p>
+  <p>The query ran in {{ "%.1f"|format(result.elapsed_ms) }} ms and came back empty.</p>
 </div>
 {% elif result and result.is_tabular %}
 <div class="grid-wrap">
@@ -34,9 +34,9 @@
 </div>
 {% elif result %}
 <div class="quiet">
-  <h3>Recorded</h3>
+  <h3>Written down</h3>
   <p>
-    Statement applied in {{ "%.1f"|format(result.elapsed_ms) }} ms
+    Query applied in {{ "%.1f"|format(result.elapsed_ms) }} ms
     {% if result.rowcount is not none %} · {{ result.rowcount }} row{% if result.rowcount != 1 %}s{% endif %} touched{% endif %}.
   </p>
 </div>
